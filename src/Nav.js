@@ -1,0 +1,17 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+function Nav() {
+  return (
+    <nav>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/cart">My Cart</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/settle">Settle</Link></li>
+      </ul>
+    </nav>
+  );
+}
+
+export default Nav;
