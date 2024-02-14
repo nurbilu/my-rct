@@ -3,19 +3,19 @@ import { getAll, getSingleByid } from '../data';
 
 const MyCart = () => {
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [Cart, setCart] = useState([]);
 
     useEffect(() => {
         setProducts(getAll());
     }, []);
     useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-}, [cart]);
+    localStorage.setItem('Cart', JSON.stringify(Cart));
+}, [Cart]);
 
     const addToCart = (product) => {
-        const existingProduct = cart.find(item => item.id === product.id);
+        const existingProduct = Cart.find(item => item.id === product.id);
         if (existingProduct) {
-            const updatedCart = cart.map(item => {
+            const updatedCart = Cart.map(item => {
                 if (item.id === product.id) {
                     return { ...item, amount: item.amount + 1 };
                 }
@@ -23,18 +23,18 @@ const MyCart = () => {
             });
             setCart(updatedCart);
         } else {
-            setCart([...cart, { ...product, amount: 1 }]);
+            setCart([...Cart, { ...product, amount: 1 }]);
         }
     };
 
     const removeFromCart = (productId) => {
-        setCart(cart.filter(product => product.id !== productId));
+        setCart(Cart.filter(product => product.id !== productId));
     };
 
     const removeOneFromCart = (productId) => {
-        const existingProduct = cart.find(item => item.id === productId);
+        const existingProduct = Cart.find(item => item.id === productId);
         if (existingProduct) {
-            const updatedCart = cart.map(item => {
+            const updatedCart = Cart.map(item => {
                 if (item.id === productId && item.amount > 1) {
                     return { ...item, amount: item.amount - 1 };
                 }
@@ -43,7 +43,7 @@ const MyCart = () => {
             setCart(updatedCart);
         }
     };
-
+    const totalItems = Cart.reduce((total, item) => total + item.amount, 0);
     return (
         <div className="App">
             <div>
@@ -59,12 +59,14 @@ const MyCart = () => {
             </div>
             <div>
                 <h3>Cart Items:</h3>
-                {cart.map(product => (
+                {Cart.map(product => (
                     <div key={product.id}>
                         {product.desc}, {product.price} - Amount: {product.amount}<br></br>
                         <button onClick={() => removeOneFromCart(product.id)}>Remove One</button>
                     </div>
                 ))}
+                <hr></hr>
+                <div>Total Items: {totalItems}</div>
             </div>
         </div>
     );

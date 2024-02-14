@@ -8,29 +8,29 @@ import { UserContext } from './UserContext';
 import Settle from './shop/Settle';
 
 function App() {
-  const { cart } = useContext(UserContext);
+  const { Cart } = useContext(UserContext);
   const [totalItems, setTotalItems] = useState(0);
-  console.log(cart);
+  console.log(Cart);
   useEffect(() => {
     // Initialize totalItems count
     let itemsCount = 0;
-    // Ensure cart is not undefined before attempting to iterate
-    if (cart && cart.length > 0) {
-      cart.forEach(item => {
+    // Ensure Cart is not undefined before attempting to iterate
+    if (Cart && Cart.length > 0) {
+      Cart.forEach(item => {
         itemsCount += item.quantity;
       });
     }
   
     setTotalItems(itemsCount);
-    // Update local storage with the cart data
-    localStorage.setItem('cart', JSON.stringify(cart));
+    // Update local storage with the Cart data
+    localStorage.setItem('Cart', JSON.stringify(Cart));
     
-  }, [cart]);
+  }, [Cart]);
   return (
     <div>
       
       <Nav />
-      <h1>Items in Cart: {totalItems}</h1>
+      {/* <h1>Items in Cart: {totalItems}</h1> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<MyCart />} />
