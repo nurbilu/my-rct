@@ -53,8 +53,10 @@ const Settle = () => {
           <div key={product.id}>
             {product.desc}, ${product.price} - Amount: {product.amount}
             <br></br>
-            <button onClick={() => removeOneFromCart(product.id)}>Remove One</button>
-            <button onClick={() => removeFromCart(product.id)}>Remove All</button>
+            <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-warning" onClick={() => removeOneFromCart(product.id)}>Remove One</button>
+            <button type="button" class="btn btn-outline-danger" onClick={() => removeFromCart(product.id)}>Remove All</button>
+            </div>
           </div>
         ))
       ) : (
@@ -64,7 +66,7 @@ const Settle = () => {
       <div>Total Price: ${totalPrice.toFixed(2)}</div>
       <hr></hr>
       <div>Total Items: {totalItems}</div>
-      <button onClick={() => Checkout()} >Checkout</button>
+      <button type="button" class="btn btn-success btn-lg"onClick={() => Checkout()} >Checkout</button>
       <ToastContainer />
     </div>
   );

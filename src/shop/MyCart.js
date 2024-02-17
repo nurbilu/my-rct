@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAll, getSingleByid } from '../data';
+import { Link } from 'react-router-dom';
 
 const MyCart = () => {
     const [products, setProducts] = useState([]);
@@ -51,8 +52,10 @@ const MyCart = () => {
                     <div key={product.id}>
                         {product.desc}, {product.price}
                         <br></br>
-                        <button onClick={() => addToCart(product)}>Add to Cart</button>
-                        <button onClick={() => removeFromCart(product.id)}>Remove</button>  
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-primary" onClick={() => addToCart(product)}>Add to Cart</button>
+                        <button type="button" class="btn btn-danger" onClick={() => removeFromCart(product.id)}>Remove</button>  
+                        </div>
                         <hr></hr>
                     </div>
                 ))}
@@ -62,12 +65,13 @@ const MyCart = () => {
                 {Cart.map(product => (
                     <div key={product.id}>
                         {product.desc}, {product.price} - Amount: {product.amount}<br></br>
-                        <button onClick={() => removeOneFromCart(product.id)}>Remove One</button>
+                        <button type="button" class="btn btn-warning" onClick={() => removeOneFromCart(product.id)}>Remove One</button>
                     </div>
                 ))}
                 <hr></hr>
                 <div>Total Items: {totalItems}</div>
             </div>
+            <div><Link to="/settle" className="btn btn-outline-light">Settle</Link></div>
         </div>
     );
 };
